@@ -17,7 +17,7 @@ public class Main : Script
 
     void OnTick(object sender, EventArgs e)
     {
-        foreach (TaskHandler t in TaskHandler.handlers)
+        foreach (TaskHandlerTwo t in TaskHandlerTwo.handlers)
         {
             t.PerformTick();
         }
@@ -31,10 +31,10 @@ public class Main : Script
         if (pe.KeyCode == Keys.F6)
         {
             Ped p = World.CreateRandomPed(Game.Player.Character.Position + Game.Player.Character.ForwardVector * 5);
-            TaskHandler t = new TaskHandler(p);
-            TaskHandler.handlers.Add(t); 
+            TaskHandlerTwo t = TaskHandlerTwo.AddTaskHandler(p);
             p.AlwaysKeepTask = true;
             p.IsPersistent = false;
+            p.BlockPermanentEvents = true;
             t.AddTask(Hash.SET_PED_COMBAT_ATTRIBUTES, 1, new object[] { p, 5, true });
             t.AddTask(Hash.SET_PED_COMBAT_ATTRIBUTES, 1, new object[] { p, 46, true });
             t.AddTask(Hash.TASK_COMBAT_PED, 10000, new object[] { p, Game.Player.Character });
